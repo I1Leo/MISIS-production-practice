@@ -1,0 +1,7 @@
+Django
+djangorestframework
+djangorestframework-simplejwt
+drf-yasg
+eqator
+sentry-sdk
+ultralytics

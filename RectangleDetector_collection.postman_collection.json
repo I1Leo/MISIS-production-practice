@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "f156d4ce-953c-4955-93ed-d21a48a86f92",
+		"name": "RectangleDetector_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32065544"
+	},
+	"item": [
+		{
+			"name": "Bearer Token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/token/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"token",
+						""
+					]
+				},
+				"description": "Данный запрос формирует токены access и refresh. В теле запроса нужно передать логин и пароль пользователя. Для тестирования нужно использовать testuser и testpassword"
+			},
+			"response": []
+		},
+		{
+			"name": "Bearer Token Refresh",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "refresh",
+							"value": "{{refresh}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/token/refresh/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"token",
+						"refresh",
+						""
+					]
+				},
+				"description": "Данный запрос предоставляет токен access. Для получения в тело запроса нужно передать полученный ранее токен refresh."
+			},
+			"response": []
+		},
+		{
+			"name": "Points of interest detection",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNjYzMDA0LCJpYXQiOjE3MjE2MjIyODYsImp0aSI6Ijk0ZjRmNDU3YmE3OTRkNTI5ZjJlOWI4MjJiMGFjN2ZlIiwidXNlcl9pZCI6MX0.Sa7YZLfdMImYPvIO8jdGduE2RZ0jFsSRmbW4ER_Txm8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image_path",
+							"value": "./img/img_3.png",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/detect/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"detect",
+						""
+					]
+				},
+				"description": "Данный запрос возвращает найденный \"точки интереса\" углы прямоугольников. В качестве авторизации используется токен access. В тело запроса нужно передать путь до изображения."
+			},
+			"response": []
+		}
+	]
+}

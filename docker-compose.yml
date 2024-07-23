@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    volumes:
+      - ./rectangle_detector:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+    command: >
+      sh -c "python manage.py migrate &&
+             echo \"from django.contrib.auth.models import User; User.objects.filter(username='testuser').exists() or User.objects.create_user('testuser', 'testuser@example.com', 'testpassword')\" | python manage.py shell &&
+             python manage.py qa &&
+             python manage.py runserver 0.0.0.0:8000"
+
